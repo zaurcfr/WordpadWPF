@@ -55,14 +55,56 @@
                 </Button.Resources>
             </Button>
             <ToggleButton
-                Name="AutoSaveTBtn"
-                Margin="0,0,25,0"
-                Content="Auto Save"
-                FontFamily="Segoe UI" 
-                FontSize="16"
-                FontWeight="SemiBold"
-                Click="AutoSaveTBtn_Click">
-                
+          Name="AutoSaveTBtn"
+          Margin="0,0,25,0" 
+          Width="50" 
+          Height="25"
+          Focusable="false" 
+          VerticalAlignment="Top" 
+          HorizontalAlignment="Right"
+          
+          Click="AutoSaveTBtn_Click">
+                <ToggleButton.Template>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </ToggleButton.Template>
+                <ToggleButton.Style>
+                    <Style TargetType="{x:Type ToggleButton}">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <Border BorderThickness="0"  >
+                                    <Image Source="switchoff.png" Stretch="Fill"  />
+                                </Border>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <Border  BorderThickness="0" >
+                                            <Image Source="switchOn.png" Stretch="fill" />
+                                        </Border>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+
+
+
+
+
             </ToggleButton>
             <Button 
                 Name="CutBtn"
@@ -136,6 +178,7 @@
             FontFamily="Comic Sans MS"
             FontSize="24"
             FontWeight="SemiBold"
+            TextChanged="Txtb_TextChanged"
             >
         </TextBox>
 

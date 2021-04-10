@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -71,7 +72,28 @@ namespace WordpadWPF
 
         private void AutoSaveTBtn_Click(object sender, RoutedEventArgs e)
         {
+            if(sender is ToggleButton toggleButton)
+            {
+                if (AutoSaveTBtn.IsChecked == true)
+                {
+                    MessageBox.Show("Autosave enabled!");
+                }
+                else if (AutoSaveTBtn.IsChecked == false)
+                {
+                    MessageBox.Show("Autosave disabled!");
+                }
+            }
+        }
 
+        private void Txtb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (AutoSaveTBtn.IsChecked == true)
+            {
+                using (StreamWriter writer = new StreamWriter(FilePathTxtb.Text))
+                {
+                    writer.Write(Txtb.Text);
+                }
+            }
         }
     }
 }
